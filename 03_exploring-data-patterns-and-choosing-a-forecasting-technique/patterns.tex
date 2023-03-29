@@ -28,7 +28,7 @@
   % 
   \begin{itemize}\justifying
   \item   Son dos los tipos de datos de interés para el pronosticador. El primer tipo son los datos recopilados en un periodo único, ya sea una hora, un día, una semana, un mes, o un trimestre. El segundo tipo son las observaciones de datos realizadas a través del tiempo. Cuando todas las observaciones se hacen durante el mismo periodo, las llamamos \alert{datos de corte transversal}.
-  \item   Cualquier variable integrada con datos recopilados, registrados u observados duranteincrementos de tiempo sucesivos se llama \alert{serie de tiempo}. La producción mensual de cervezaen Estados Unidos es un ejemplo de una \alert{serie de tiempo}.
+  \item   Cualquier variable integrada con datos recopilados, registrados u observados durante incrementos de tiempo sucesivos se llama \alert{serie de tiempo}. La producción mensual de cerveza en México es un ejemplo de una \alert{serie de tiempo}.
   \end{itemize}
 \end{frame}
 
@@ -36,7 +36,80 @@
   Uno de los pasos más importantes en la selección de un método para pronosticar adecuado con datos de una serie de tiempo es considerar los diferentes \alert{tipos de patrones de datos}. Existen cuatro tipos generales: \alert{horizontal, tendencias, estacionales y cíclicos}.
 \end{frame}
 
+\begin{frame}{Patrón Horizontal}
 
+  Cuando los datos recopilados en el transcurso del tiempo fluctúan alrededor de un nivel o una media constantes, hay un patrón horizontal. Se dice que este tipo de series es estacionario en su media. Se considera que las ventas mensuales de un producto alimenticio que no se incrementan, ni disminuyen, consistentemente durante un largo periodo tienen un patrón horizontal
+\end{frame}
+
+\begin{frame}{Patrón de Tendencia}
+
+Cuando los datos crecen o descienden en varios periodos, existe un patrón de tendencia. Lafigura 3-2 muestra el crecimiento (tendencia) a largo plazo de una serie de tiempo (costos deviviendas) con datos anuales. Para ilustrar el crecimiento se dibuja una recta de tendencialineal. Si bien la variable costo de la vivienda no se ha incrementado cada año, el cambio de lavariable ha sido generalmente hacia arriba entre los periodos 1 a 20  
+\end{frame}
+
+
+\begin{frame}{Patrón Cíclico}
+  Cuando las observaciones indican aumentos y caídas que no tienen un periodo fijo, existeun patrón cíclico. El componente cíclico es la fluctuación con forma de onda alrededor de latendencia y, por lo común, se ve afectada por las condiciones económicas generales. Un componente cíclico, si existe, típicamente presenta un ciclo durante varios años. Las fluctuacionescíclicas a menudo están influidas por cambios en las expansiones y contracciones económicas,mejor conocidas como el ciclo de negocios
+\end{frame}
+
+\begin{frame}{Patrón Estacional}
+
+  Cuando las observaciones se ven influidas por factores temporales, existe un patrónestacional. El componente estacional se refiere a \alert{un patrón de cambio que se repite año trasaño}. Para las series mensuales, el componente estacional mide la variabilidad de la serie cadaenero, cada febrero, y así sucesivamente. Para una serie trimestral, hay cuatro elementos estacionales, uno por cada trimestre.
+  
+\end{frame}
+
+
+\section{Análisis de Autocorrelación}
+\label{sec:autocorrelation}
+
+\begin{frame}{Autocorrelación}
+  
+  \begin{itemize}\justifying \parskip3mm
+  \item Cuando se mide una variable a lo largo del tiempo, las observaciones en diferentes periodos \alert{amenudo están relacionadas o correlacionadas}. Esta correlación se mide usando el coeficientede autocorrelación.
+  \item Los patrones de datos que incluyen componentes como \alert{tendencia y estacionalidad puedenestudiarse usando autocorrelaciones}. Los patrones se identifican examinando los coeficientesde autocorrelación de una variable en diferentes retrasos de tiempo
+  \end{itemize}
+
+
+\end{frame}
+
+\begin{frame}{Autocorrelación}
+
+  \href{https://drive.google.com/uc?id=1PODZqwPsaIsQ1M0-XMtr1J2GfSapaeV5&export=download}{Descargar Datos Aquí}  
+  
+  \begin{table}[!ht]
+    \caption{Datos de ejemplo para autocorrelación}
+    \centering
+    \scalebox{0.8}{%
+    \begin{tabular}{clccc}
+      \toprule
+      Tiempo & & Datos  & $Y$ atrasada un & $Y$ atrasada dos \\ 
+      $t$ & Mes & Originales $T_t$ & periodo $Y_{t-1}$& periodos $Y_{t-2}$\\
+      \midrule
+        1 & Enero & 123 & ~ & ~ \\ 
+        2 & Febrero & 130 & 123 & ~ \\ 
+        3 & Marzo & 125 & 130 & 123 \\ 
+        4 & Abril & 138 & 125 & 130 \\ 
+        5 & Mayo & 145 & 138 & 125 \\ 
+        6 & Junio & 142 & 145 & 138 \\ 
+        7 & Julio & 141 & 142 & 145 \\ 
+        8 & Agosto & 146 & 141 & 142 \\ 
+        9 & Septiembre & 147 & 146 & 141 \\ 
+        10 & Octubre & 157 & 147 & 146 \\ 
+        11 & Noviembre & 150 & 157 & 147 \\ 
+      12 & Diciembre & 160 & 150 & 157 \\
+      \bottomrule
+    \end{tabular}
+    }% scalebox
+\end{table}
+\end{frame}
+
+\begin{frame}{Fórmulas de Autocorrelación}
+  La ecuación~\ref{eq:correlation-coef} es la fórmula para calcular $k$ el coeficiente de autocorrelación ($r_k$) entre lasobservaciones $Y_t$ y $Y_{t-k}$, que se encuentran a $k$ periodos de distancia.
+
+  \begin{equation}
+    \label{eq:correlation-coef}
+    r_k =  \frac{\displaystyle\sum_{t=k+1}^{n} (Y_t - \overline{Y})(Y_{t-k} - \overline{Y})}{\displaystyle\sum_{t=1}^{n}(Y_{t} - \overline{Y})^{2}} \quad k=0,1,2,\ldots
+  \end{equation}
+\end{frame}
 
 %%% Local Variables:
 %%% mode: latex
